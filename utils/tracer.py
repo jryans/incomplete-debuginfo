@@ -94,7 +94,7 @@ def get_variables_from_trace(trace, dbg):
     current_line = None
     for line in trace.split('\n'):
         line = line.strip()
-        
+
         if dbg == 'gdb':
 
             if 'No locals' in line or 'Inferior' in line or 'Temporary' in line or 'Reading' in line or len(line.split()) == 0:
@@ -166,4 +166,3 @@ def get_traced_variables(binary, dbg):
     trace = run_dbg(binary, dbg_script, dbg)
 
     return get_variables_from_trace(trace, dbg)
-    
