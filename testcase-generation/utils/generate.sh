@@ -22,8 +22,8 @@ ${CSMITH_SCRIPT} ${SEED} > ${OUT_DIR}/${SOURCE_FILE}.orig.c
 rm platform.info
 
 # apply preprocessor
-${GCC_BIN} -E -P ${OUT_DIR}/${SOURCE_FILE}.orig.c -I${CSMITH_INCLUDE} -o ${OUT_DIR}/gcc/${SOURCE_FILE}.tmp -w
-${CLANG_BIN} -E ${OUT_DIR}/${SOURCE_FILE}.orig.c -I${CSMITH_INCLUDE} -o ${OUT_DIR}/clang/${SOURCE_FILE}.tmp -Wno-everything
+# ${GCC_BIN} -E -P ${OUT_DIR}/${SOURCE_FILE}.orig.c ${CSMITH_INCLUDE} -o ${OUT_DIR}/gcc/${SOURCE_FILE}.tmp -w
+${CLANG_BIN} -E ${OUT_DIR}/${SOURCE_FILE}.orig.c ${CSMITH_INCLUDE} -o ${OUT_DIR}/clang/${SOURCE_FILE}.tmp -Wno-everything
 
 # cleanup for clang
 mv ${OUT_DIR}/clang/${SOURCE_FILE}.tmp ${OUT_DIR}/clang/${SOURCE_FILE}
@@ -35,15 +35,15 @@ rm ${OUT_DIR}/clang/${SOURCE_FILE}
 mv ${OUT_DIR}/clang/${SOURCE_FILE}.clear ${OUT_DIR}/clang/${SOURCE_FILE}
 
 # cleanup for gcc
-mv ${OUT_DIR}/gcc/${SOURCE_FILE}.tmp ${OUT_DIR}/gcc/${SOURCE_FILE}
-perl -pi -e 's/__asm__ \(.*?\)//' ${OUT_DIR}/gcc/${SOURCE_FILE}
-perl -pi -e 's/^#.*//' ${OUT_DIR}/gcc/${SOURCE_FILE}
-perl -pi -e 's/__PRETTY_FUNCTION__/__func__/g' ${OUT_DIR}/gcc/${SOURCE_FILE}
-perl -pi -e 's/.*__extension__ __func__.*//g' ${OUT_DIR}/gcc/${SOURCE_FILE}
-sed -z 's/extern int __fpclassifyf128.*Float.*\n     __attribute__ ((__const__));\n//g' ${OUT_DIR}/gcc/${SOURCE_FILE} > ${OUT_DIR}/gcc/${SOURCE_FILE}.tmp
-mv ${OUT_DIR}/gcc/${SOURCE_FILE}.tmp ${OUT_DIR}/gcc/${SOURCE_FILE}
-sed '/^#/ d' ${OUT_DIR}/gcc/${SOURCE_FILE} > ${OUT_DIR}/gcc/${SOURCE_FILE}.clear
-rm ${OUT_DIR}/gcc/${SOURCE_FILE}
-mv ${OUT_DIR}/gcc/${SOURCE_FILE}.clear ${OUT_DIR}/gcc/${SOURCE_FILE}
+# mv ${OUT_DIR}/gcc/${SOURCE_FILE}.tmp ${OUT_DIR}/gcc/${SOURCE_FILE}
+# perl -pi -e 's/__asm__ \(.*?\)//' ${OUT_DIR}/gcc/${SOURCE_FILE}
+# perl -pi -e 's/^#.*//' ${OUT_DIR}/gcc/${SOURCE_FILE}
+# perl -pi -e 's/__PRETTY_FUNCTION__/__func__/g' ${OUT_DIR}/gcc/${SOURCE_FILE}
+# perl -pi -e 's/.*__extension__ __func__.*//g' ${OUT_DIR}/gcc/${SOURCE_FILE}
+# sed -z 's/extern int __fpclassifyf128.*Float.*\n     __attribute__ ((__const__));\n//g' ${OUT_DIR}/gcc/${SOURCE_FILE} > ${OUT_DIR}/gcc/${SOURCE_FILE}.tmp
+# mv ${OUT_DIR}/gcc/${SOURCE_FILE}.tmp ${OUT_DIR}/gcc/${SOURCE_FILE}
+# sed '/^#/ d' ${OUT_DIR}/gcc/${SOURCE_FILE} > ${OUT_DIR}/gcc/${SOURCE_FILE}.clear
+# rm ${OUT_DIR}/gcc/${SOURCE_FILE}
+# mv ${OUT_DIR}/gcc/${SOURCE_FILE}.clear ${OUT_DIR}/gcc/${SOURCE_FILE}
 
 exit 0

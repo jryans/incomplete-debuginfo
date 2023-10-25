@@ -24,17 +24,17 @@ def create_directories(testcase_dir, testcaseid, gcc, clang):
         os.makedirs(testcase_dir)
 
         os.makedirs(os.path.join(testcase_dir, 'src'))
-        os.makedirs(os.path.join(testcase_dir, 'src/gcc'))
+        # os.makedirs(os.path.join(testcase_dir, 'src/gcc'))
         os.makedirs(os.path.join(testcase_dir, 'src/clang'))
 
         os.makedirs(os.path.join(testcase_dir, 'bin'))
-        os.makedirs(os.path.join(testcase_dir, 'bin/gcc'))
+        # os.makedirs(os.path.join(testcase_dir, 'bin/gcc'))
         os.makedirs(os.path.join(testcase_dir, 'bin/clang'))
 
-    for version in gcc.split(':'):
-        cc_bin_path = os.path.join(testcase_dir, 'bin/gcc%s' % version)
-        if not os.path.exists(cc_bin_path):
-            os.makedirs(cc_bin_path)
+    # for version in gcc.split(':'):
+    #     cc_bin_path = os.path.join(testcase_dir, 'bin/gcc%s' % version)
+    #     if not os.path.exists(cc_bin_path):
+    #         os.makedirs(cc_bin_path)
     for version in clang.split(':'):
         cc_bin_path = os.path.join(testcase_dir, 'bin/clang%s' % version)
         if not os.path.exists(cc_bin_path):
@@ -66,15 +66,15 @@ def generate(testcaseid, args):
 
     # compile trunk if none
     if not testcase_info:
-        gcc_out_file = os.path.join(testcase_dir, 'bin/gcc/opt')
+        # gcc_out_file = os.path.join(testcase_dir, 'bin/gcc/opt')
         clang_out_file = os.path.join(testcase_dir, 'bin/clang/opt')
 
-        gcc_source_file = os.path.join(testcase_dir, 'src/gcc/a.c')
+        # gcc_source_file = os.path.join(testcase_dir, 'src/gcc/a.c')
         clang_source_file = os.path.join(testcase_dir, 'src/clang/a.c')
 
-        ret = run_cmd(CC % (args.path, 'gcc', gcc_out_file, gcc_source_file))
-        if ret:
-            log_debug(f'[{testcaseid}] Error while compiling with GCC')
+        # ret = run_cmd(CC % (args.path, 'gcc', gcc_out_file, gcc_source_file))
+        # if ret:
+        #     log_debug(f'[{testcaseid}] Error while compiling with GCC')
 
         ret = run_cmd(CC % (args.path, 'clang', clang_out_file, clang_source_file))
         if ret:
@@ -82,30 +82,30 @@ def generate(testcaseid, args):
 
         log_debug(f'[{testcaseid}] Testcase GCC/CLANG trunk version compilation completed')
 
-    if not 'gcc_versions' in testcase_info:
-        testcase_info['gcc_versions'] = ['gcc']
+    # if not 'gcc_versions' in testcase_info:
+    #     testcase_info['gcc_versions'] = ['gcc']
     if not 'clang_versions' in testcase_info:
         testcase_info['clang_versions'] = ['clang']
 
     # compile required gcc versions
-    if args.gcc:
-        for version in args.gcc.split(':'):
-            if version in testcase_info['gcc_versions']:
-                continue
+    # if args.gcc:
+    #     for version in args.gcc.split(':'):
+    #         if version in testcase_info['gcc_versions']:
+    #             continue
 
-            gcc_out_file = os.path.join(testcase_dir, 'bin/gcc%s/opt' % version)
-            gcc_source_file = os.path.join(testcase_dir, 'src/gcc/a.c')
-            gcc_version = 'gcc-%s' % version
+    #         gcc_out_file = os.path.join(testcase_dir, 'bin/gcc%s/opt' % version)
+    #         gcc_source_file = os.path.join(testcase_dir, 'src/gcc/a.c')
+    #         gcc_version = 'gcc-%s' % version
 
-            ret = run_cmd(CC % (args.path, gcc_version, gcc_out_file, gcc_source_file))
-            if ret:
-                cc_bin_path = os.path.join(testcase_dir, 'bin/gcc%s' % version)
-                os.rmdir(cc_bin_path)
-                log_debug(f'[{testcaseid}] Error while compiling with GCC-{version}')
-            else:
-                testcase_info['gcc_versions'].append('gcc%s' % version)
+    #         ret = run_cmd(CC % (args.path, gcc_version, gcc_out_file, gcc_source_file))
+    #         if ret:
+    #             cc_bin_path = os.path.join(testcase_dir, 'bin/gcc%s' % version)
+    #             os.rmdir(cc_bin_path)
+    #             log_debug(f'[{testcaseid}] Error while compiling with GCC-{version}')
+    #         else:
+    #             testcase_info['gcc_versions'].append('gcc%s' % version)
 
-        log_debug(f'[{testcaseid}] Testcase GCC extra-version compilation completed')
+    #     log_debug(f'[{testcaseid}] Testcase GCC extra-version compilation completed')
 
     # compile required clang versions 
     if args.clang:
