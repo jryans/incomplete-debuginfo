@@ -189,7 +189,7 @@ def percentage_per_optlevel(testcases, args, compiler):
             log_info(f'At -O{opt_level}: ')
             log_info(f'\tAvailable variables:     \t{hist[opt_level]["available"]:.4f}')
             log_info(f'\tMissing variables:       \t{hist[opt_level]["missing"]:.4f}')
-            log_info(f'\tOptmized out variables:  \t{hist[opt_level]["optimized_out"]:.4f}')
+            log_info(f'\tOptimized out variables: \t{hist[opt_level]["optimized_out"]:.4f}')
             log_info(f'\tNot Available variables: \t{hist[opt_level]["not_available"]:.4f}')
             log_info(f'\tLines Ratio:             \t{hist[opt_level]["lines_ratio"]:.4f}')
 
