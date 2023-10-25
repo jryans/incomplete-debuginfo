@@ -121,6 +121,10 @@ def get_variables_from_trace(trace, dbg):
             if line.startswith('[') or line.startswith('*'):
                 continue
 
+            # Remove metadata shown by some LLDB versions that confuses the
+            # following steps
+            line = line.replace(" [opt]", "")
+
             line_no = line.split()[-1]
             if ':' in line_no:
                 line_no = line_no.split(':')[-2]
