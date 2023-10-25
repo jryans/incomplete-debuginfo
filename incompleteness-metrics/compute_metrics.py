@@ -233,11 +233,12 @@ if __name__ == '__main__':
     parser = ArgumentParser(description = 'Get statistics about live variables per line')
 
     parser.add_argument('--indir', dest = 'indir', type = str, help = 'Input directory (default = `./testcases`)', default = 'testcases')
-    parser.add_argument('--debug', dest = 'debug', action='store_true', help='Enable debug prints', default = False)
+    parser.add_argument('--proc', dest = 'proc', type = int, help = 'Number of processes to use', default = 1)
     parser.add_argument('--gcc', dest = 'gcc', action='store_const', help = 'Get statistics about GCC binaries using GDB (default = `enabled`)', default = 0, const = 1)
     parser.add_argument('--gcc-version', dest = 'gcc_version', type = str, help = 'GCC versions to be tested (default = `trunk`)', default = '')
     parser.add_argument('--clang', dest = 'clang', action='store_const', help = 'Get statistics about CLANG binaries using LLDB (default = `disabled`)', default = 0, const = 1)
     parser.add_argument('--clang-version', dest = 'clang_version', type = str, help = 'CLANG versions to be tested (default = `trunk`)', default = '')
+    parser.add_argument('--debug', dest = 'debug', action='store_true', help='Enable debug prints', default = False)
 
     args = parser.parse_args()
 
