@@ -94,6 +94,7 @@ def get_vars_diff_per_line(live_variables, opt_level, compiler, lines_filter):
             not_available = float(len(not_available)) / len(total)
             missing = float(len(missing)) / len(total)
 
+            # JRS: Isn't total always 1 here...?
             total = optimized_out + available + not_available + missing
 
             result[line] = list(map(lambda x: x / total, [available, missing, optimized_out, not_available]))
@@ -119,6 +120,7 @@ def get_vars_diff_per_line(live_variables, opt_level, compiler, lines_filter):
     out['optimized_out'] /= len(result)
     out['not_available'] /= len(result)
 
+    # JRS: Similarly, when is this not 1...?
     total = out['available'] + out['missing'] + out['optimized_out'] + out['not_available']
 
     # normalize to 1
