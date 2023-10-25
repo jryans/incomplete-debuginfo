@@ -155,7 +155,7 @@ def percentage_per_testcase(testcases, args, compiler):
             if compiler not in testcase['trace']:
                 break
 
-            live_variables = testcase['trace'][compiler]['live_variables'] 
+            live_variables = testcase['trace'][compiler]['live_variables']
             if not opt_level in live_variables or live_variables[opt_level] == 'ERROR' or live_variables['0'] == 'ERROR':
                 err = True
                 break
