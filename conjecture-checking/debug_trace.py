@@ -42,7 +42,7 @@ def get_trace(testcaseid, args):
 
     # compute live variables
     for opt_level in ['0', '1', '2', '3', 'g', 's']:
-        bin_filename = os.path.join(testcase_dir, 'bin/%s/opt-%s' % (cc_version, opt_level)) 
+        bin_filename = os.path.join(testcase_dir, 'bin/%s/opt-%s' % (cc_version, opt_level))
 
         if not os.path.exists(bin_filename):
             log_debug(f'[{testcaseid}] {bin_filename} does not exist')
