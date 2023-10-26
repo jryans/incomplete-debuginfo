@@ -34,9 +34,9 @@ def check_CX(testcaseid, args):
         testcase_info = json.load(f)
 
     if args.gcc:
-        cc_version = 'gcc' if not args.gcc_version else 'gcc%s' % args.gcc_version
+        cc_version = 'gcc' if not args.gcc_version else 'gcc-%s' % args.gcc_version
     else:
-        cc_version = 'clang' if not args.clang_version else 'clang%s' % args.clang_version
+        cc_version = 'clang' if not args.clang_version else 'clang-%s' % args.clang_version
 
     trace = testcase_info['trace'][cc_version]['live_variables']
 

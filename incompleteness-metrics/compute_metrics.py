@@ -214,11 +214,11 @@ def main(args):
     log_debug(f'[+] Found {testcases["computed_testcases"]} to be computed')
 
     if args.gcc:
-        gcc_version = 'gcc' if not args.gcc_version else 'gcc%s' % args.gcc_version
+        gcc_version = 'gcc' if not args.gcc_version else 'gcc-%s' % args.gcc_version
         stats = percentage_per_optlevel(testcases, args, gcc_version)
         testcases['statistics'][gcc_version] = stats
     elif args.clang:
-        clang_version = 'clang' if not args.clang_version else 'clang%s' % args.clang_version
+        clang_version = 'clang' if not args.clang_version else 'clang-%s' % args.clang_version
         stats = percentage_per_optlevel(testcases, args, clang_version)
         testcases['statistics'][clang_version] = stats
 

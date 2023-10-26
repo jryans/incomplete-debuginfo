@@ -32,11 +32,11 @@ def create_directories(testcase_dir, testcaseid, gcc, clang):
         os.makedirs(os.path.join(testcase_dir, 'bin/clang'))
 
     # for version in gcc.split(':'):
-    #     cc_bin_path = os.path.join(testcase_dir, 'bin/gcc%s' % version)
+    #     cc_bin_path = os.path.join(testcase_dir, 'bin/gcc-%s' % version)
     #     if not os.path.exists(cc_bin_path):
     #         os.makedirs(cc_bin_path)
     for version in clang.split(':'):
-        cc_bin_path = os.path.join(testcase_dir, 'bin/clang%s' % version)
+        cc_bin_path = os.path.join(testcase_dir, 'bin/clang-%s' % version)
         if not os.path.exists(cc_bin_path):
             os.makedirs(cc_bin_path)
 
@@ -93,17 +93,17 @@ def generate(testcaseid, args):
     #         if version in testcase_info['gcc_versions']:
     #             continue
 
-    #         gcc_out_file = os.path.join(testcase_dir, 'bin/gcc%s/opt' % version)
+    #         gcc_out_file = os.path.join(testcase_dir, 'bin/gcc-%s/opt' % version)
     #         gcc_source_file = os.path.join(testcase_dir, 'src/gcc/a.c')
     #         gcc_version = 'gcc-%s' % version
 
     #         ret = run_cmd(CC % (args.path, gcc_version, gcc_out_file, gcc_source_file))
     #         if ret:
-    #             cc_bin_path = os.path.join(testcase_dir, 'bin/gcc%s' % version)
+    #             cc_bin_path = os.path.join(testcase_dir, 'bin/gcc-%s' % version)
     #             os.rmdir(cc_bin_path)
     #             log_debug(f'[{testcaseid}] Error while compiling with GCC-{version}')
     #         else:
-    #             testcase_info['gcc_versions'].append('gcc%s' % version)
+    #             testcase_info['gcc_versions'].append('gcc-%s' % version)
 
     #     log_debug(f'[{testcaseid}] Testcase GCC extra-version compilation completed')
 
@@ -113,17 +113,17 @@ def generate(testcaseid, args):
             if version in testcase_info['clang_versions']:
                 continue
 
-            clang_out_file = os.path.join(testcase_dir, 'bin/clang%s/opt' % version)
+            clang_out_file = os.path.join(testcase_dir, 'bin/clang-%s/opt' % version)
             clang_source_file = os.path.join(testcase_dir, 'src/clang/a.c')
             clang_version = 'clang-%s' % version
 
             ret = run_cmd(CC % (args.path, clang_version, clang_out_file, clang_source_file))
             if ret:
-                cc_bin_path = os.path.join(testcase_dir, 'bin/clang%s' % version)
+                cc_bin_path = os.path.join(testcase_dir, 'bin/clang-%s' % version)
                 os.rmdir(cc_bin_path)
                 log_debug(f'[{testcaseid}] Error while compiling with CLANG-{version}')
             else:
-                testcase_info['clang_versions'].append('clang%s' % version)
+                testcase_info['clang_versions'].append('clang-%s' % version)
 
         log_debug(f'[{testcaseid}] Testcase CLANG extra-version compilation completed')
 
