@@ -75,15 +75,23 @@ def run_dbg(binary, dbg_script, dbg):
 
     output = ''
 
-    cmd = [GDB, LLDB][dbg == 'lldb']
+    cmd_template = [GDB, LLDB][dbg == 'lldb']
 
-    with tempfile.TemporaryDirectory() as tmpdir:    
+    with tempfile.TemporaryDirectory() as tmp_dir:
 
-        tmpfile = str(random.randint(0, 2**32)) + '.dbg'
-        with open(os.path.join(tmpdir, tmpfile), 'w') as f:
+        script_file = str(random.randint(0, 2**32)) + '.dbg'
+        script_path = os.path.join(tmp_dir, script_file)
+        with open(script_path, 'w') as f:
             f.write(dbg_script)
 
-        output = run_cmd(cmd % (os.path.join(tmpdir, tmpfile), binary), get_output = True)
+        # print(f"Binary: {binary}")
+        # print(f"Script: {script_path}")
+
+        cmd = cmd_template % (script_path, binary)
+
+        # print(f"Command: {cmd}")
+
+        output = run_cmd(cmd, get_output = True)
 
     return output
 
