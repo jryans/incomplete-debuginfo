@@ -176,6 +176,8 @@ def percentage_per_optlevel(testcases, args, compiler):
 
     total = percentage_per_testcase(testcases, args, compiler)
 
+    log_info(f'[+] Encountered {len(total)} with valid data')
+
     hist = {}
     for opt_level in ['1', '2', '3', 'g', 's']:
         hist[opt_level] = {'lines_ratio': 0, 'available': 0, 'missing': 0, 'optimized_out': 0, 'not_available': 0}
@@ -210,7 +212,7 @@ def main(args):
         log_info(f'[-] Could not find `testcases.json` file inside `{args.indir}`')
         exit(1)
 
-    log_debug(f'[+] Found {testcases["computed_testcases"]} to be computed')
+    log_info(f'[+] Found {testcases["computed_testcases"]} to be computed')
 
     if args.gcc:
         gcc_version = 'gcc' if not args.gcc_version else 'gcc-%s' % args.gcc_version
