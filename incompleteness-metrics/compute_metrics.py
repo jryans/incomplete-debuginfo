@@ -141,7 +141,6 @@ def percentage_per_testcase(testcases, args, compiler):
         testcase_file = os.path.join(testcase_dir, 'testcase.json')
         with open(testcase_file) as f:
             jsons.append(json.load(f))
-        break
 
     total = []
     for i, testcase in enumerate(jsons):
