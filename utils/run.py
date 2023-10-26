@@ -4,16 +4,34 @@ def run_cmd(cmd, debug = False, get_output = False, get_err = False):
     r = None
     try:
         if debug:
-            r = run(cmd.split(), timeout = 30)
+            r = run(
+                cmd.split(),
+                timeout = 30,
+            )
             r.check_returncode()
         elif get_output:
-            r = run(cmd.split(), stdout = PIPE, stderr = PIPE, timeout = 30)
+            r = run(
+                cmd.split(),
+                stdout = PIPE,
+                stderr = PIPE,
+                timeout = 30,
+            )
             return r.stdout.decode()
         elif get_err:
-            r = run(cmd.split(), stdout = PIPE, stderr = PIPE, timeout = 30)
+            r = run(
+                cmd.split(),
+                stdout = PIPE,
+                stderr = PIPE,
+                timeout = 30,
+            )
             return r.stderr.decode()
         else:
-            r = run(cmd.split(), stdout = DEVNULL, stderr = DEVNULL, timeout = 30)
+            r = run(
+                cmd.split(),
+                stdout = DEVNULL,
+                stderr = DEVNULL,
+                timeout = 30,
+            )
             r.check_returncode()
     except (CalledProcessError, TimeoutExpired):
         if r == None:
