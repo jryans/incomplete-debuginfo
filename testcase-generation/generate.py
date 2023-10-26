@@ -141,10 +141,7 @@ def main(args):
     
     if not os.path.exists(args.outdir):
         os.makedirs(args.outdir)
-    else:
-        log_info(f'Output directory already existing: EXITING')
-        exit(1)
-    
+
     pool = Pool(processes = args.proc)
     for i in range(args.testcases):
         if args.proc > 1:
@@ -156,6 +153,9 @@ def main(args):
     
     testcases_json = os.path.join(args.outdir, 'testcases.json')
     testcases = {}
+    if os.path.exists(testcases_json):
+        with open(testcases_json) as f:
+            testcases = json.load(f)
 
     count = 0
     for _ in glob(args.outdir + '/[0-9]*'):
